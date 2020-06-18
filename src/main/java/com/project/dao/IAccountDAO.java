@@ -11,9 +11,12 @@ public interface IAccountDAO {
 	public List<Account> findAll(); // READ
 	public Account findById(int accountId);
 	public Account findByAccountStatus(String status);
+	public Account findByAccountType(String type);
 	
 	public int update(Account a); // UPDATE
 	
 	public int delete(int accountId); // DELETE
+
+	Account findByAccountType(Object type);
 
 }

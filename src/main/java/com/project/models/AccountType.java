@@ -7,10 +7,10 @@ public class AccountType {
 	private String type; //not null, unique
 	
 	
-	public AccountType(int typeId, String type) {
+	public AccountType(int typeId, String accountType) {
 		super();
 		this.typeId = typeId;
-		this.type = type;
+		this.type = accountType;
 	}
 	
 	public AccountType() {
@@ -29,10 +29,6 @@ public class AccountType {
 		this.typeId = typeId;
 	}
 
-
-	public String getType() {
-		return type;
-	}
 
 
 	public void setType(String type) {

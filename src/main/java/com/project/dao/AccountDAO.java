@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.models.Account;
+import com.project.models.AccountStatus;
 import com.project.models.AccountType;
 import com.project.util.ConnectionUtil;
 
@@ -61,7 +62,8 @@ public class AccountDAO implements IAccountDAO {
 		
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			
-			String sql = "SELECT * FROM Account INNER JOIN ROLES ON USERS.role_id = ROLES.id";
+			String sql = "SELECT * FROM Accounts INNER JOIN ACCOUNT_STATUS ON Account_status.ID = Accounts.Status_id "
+					+ "INNER JOIN ACCOUNT_TYPE ON Account_Type.ID = Accounts.Type_id";
 			
 			Statement stmt = conn.createStatement();
 			
@@ -99,7 +101,7 @@ public class AccountDAO implements IAccountDAO {
 	@Override
 	public Account findById(int accountId) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM ACCOUNT INNER JOIN Accounts ON ACCOUNT.Account_id = ROLES.id WHERE USERS.id = ?";
+			String sql = "SELECT * FROM ACCOUNTS INNER JOIN Accounts ON ACCOUNT.Account_id = ACCOUNTS.id WHERE ACCOUNTS.id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, accountId);
 			
@@ -122,9 +124,28 @@ public class AccountDAO implements IAccountDAO {
 	}
 
 	@Override
-	public Account findByAccountStatus(String status) {
-		// TODO Auto-generated method stub
+	public Account findByAccountType(String type) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT * FROM ACCOUNTS INNER JOIN Accounts ON ACCOUNT.Account_Status = STATUS_ID WHERE STATUS_ID = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(3, type);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				double balance = rs.getDouble("balance");
+				int AccountId = rs.getInt("AccountId");
+			
+				
+				// And use that data to create a User object accordingly
+			
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
+	
 	}
 
 	@Override
@@ -138,5 +159,16 @@ public class AccountDAO implements IAccountDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public Account findByAccountStatus(String status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Account findByAccountType(Object type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

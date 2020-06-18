@@ -8,20 +8,22 @@ import com.project.models.Account;
 import com.project.models.User;
 
 public class AccountService {
+	public static Object instance;
 	
 	private IAccountDAO dao = new AccountDAO();
 	
 	public int insert(Account a) {
 		return dao.insert(a);
 	}
-	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Account> findAll() {
+		return dao.findAll();
 	}
-
+	public Account findById(int AccountId) {
+		
+		return dao.findById(AccountId);
+	}
+	public Account findByAccountStatus(String status) {
+		return dao.findByAccountStatus(status);
+}
 }

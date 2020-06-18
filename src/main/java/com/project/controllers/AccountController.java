@@ -2,19 +2,24 @@ package com.project.controllers;
 
 import java.util.List;
 
-import com.project.models.User;
+import com.project.models.Account;
 import com.project.services.AccountService;
 
 public class AccountController {
 	
-private final AccountService accountService = new AccountService();
+private final static AccountService accountService = new AccountService();
 	
-	public User findUserById(int id) {
+	public static Account findAccountById(int id) {
 		return accountService.findById(id);
 	}
 	
-	public List<User> findAllUsers() {		
+	public static List<Account> findAllAccount() {		
 		return accountService.findAll();
+	}
+
+	public static void UpdateAccount(Account a) {
+		return;
+		
 	}
 
 }
